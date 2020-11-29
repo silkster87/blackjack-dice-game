@@ -1,0 +1,18 @@
+<div class="player2" style="margin-top: 2cm; text-align: center;">
+    <h2>
+      <p>Player 2</p>
+    </h2>
+    <p>Games won: {{user2GamesWon}}</p>
+    <p>Score total for game: {{totalScore2}}</p>
+    
+
+    <div class="die2">
+      <h2 style="vertical-align: middle;">Die Score {{die2Number}}</h2>
+    </div>
+
+    <span *ngIf="user2turn === true">
+      <button (click)="handleRollDiceButtonClick2()" class="btn btn-primary" style="margin-right: 3cm; margin-top: 1cm">Roll Dice</button>
+      <button (click)="handleStickButtonClick2()" class="btn btn-primary" style="margin-top: 1cm">Stick</button>
+    </span>
+  </div>
+
