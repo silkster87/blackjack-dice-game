@@ -6,6 +6,7 @@
 
   <app-player1 
               [(totalScore1)] = "totalScore1"
+              (totalScore1Change) = "totalScore1=$event"
               [(user1turn)] = "p1Turn"
               [user1GamesWon] = "user1GamesWon"
               (user1turnChange)="p1Turn=$event"
@@ -13,6 +14,7 @@
               ></app-player1>
   <app-player2 
                 [(totalScore2)] = "totalScore2"
+                (totalScore2Change) = "totalScore2=$event"
                 [(user2turn)] = "p2Turn"
                 [user2GamesWon] = "user2GamesWon"
                 (user2turnChange)="p2Turn=$event"

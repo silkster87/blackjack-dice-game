@@ -14,6 +14,7 @@ export class Player2Component {
   die2Number: number;
    
   @Output() user2turnChange = new EventEmitter<boolean>();
+  @Output() totalScore2Change = new EventEmitter<number>();
   @Output('player2Sticked') player2StickedEventEmitter : EventEmitter<number> = new EventEmitter<number>();
 
 
@@ -30,6 +31,7 @@ export class Player2Component {
     this.user2turnChange.emit(this.user2turn);
     //Send totalScore2 back up to the parent to compare with totalScore1
     this.player2StickedEventEmitter.emit(this.totalScore2);
+    this.totalScore2Change.emit(this.totalScore2);
     
   }
 }

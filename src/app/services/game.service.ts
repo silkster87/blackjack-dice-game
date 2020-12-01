@@ -10,7 +10,7 @@ export class GameService {
   private p1Game: Game;
   private p2Game: Game;
   
-
+  
   constructor() {
     this.p1Game = {
       totalScore: 0,

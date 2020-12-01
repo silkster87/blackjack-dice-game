@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Game } from './models/game.model';
 import { GameService } from './services/game.service';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
+
 export class AppComponent {
 
    p1Turn: boolean;
