@@ -7,7 +7,7 @@
     
 
     <div class="die1">
-      <h2 style="vertical-align: middle;">Die Score {{die1Number}}</h2>
+        <img *ngIf="die1Number!=null" src="../assets/dice{{die1Number}}.svg" style="width:70px;">
     </div>
 
     <span *ngIf="user1turn === true">
