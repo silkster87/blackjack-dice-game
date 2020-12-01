@@ -5,11 +5,17 @@
   <hr />
 
   <app-player1 
-              [user1turn] = "p1Turn"
+              [(totalScore1)] = "totalScore1"
+              [(user1turn)] = "p1Turn"
+              [user1GamesWon] = "user1GamesWon"
+              (user1turnChange)="p1Turn=$event"
               (player1Sticked)="handlePlayer1Sticked($event)"
               ></app-player1>
   <app-player2 
-                [user2turn] = "p2Turn"
+                [(totalScore2)] = "totalScore2"
+                [(user2turn)] = "p2Turn"
+                [user2GamesWon] = "user2GamesWon"
+                (user2turnChange)="p2Turn=$event"
                 (player2Sticked)="handlePlayer2Sticked($event)"
                 ></app-player2>
 
