@@ -9,19 +9,21 @@ export class GameService {
 
   private p1Game: Game;
   private p2Game: Game;
-  
+  private gameArray : Array<Game>;
   
   constructor() {
     this.p1Game = {
       totalScore: 0,
       GamesWon: 0,
-      Turn: true
+      Turn: true,
+      wonLastGame: true //P1 starts play first
   };
 
   this.p2Game = {
       totalScore: 0,
       GamesWon: 0,
-      Turn: false
+      Turn: false,
+      wonLastGame: false
   };
    }
 
@@ -46,30 +48,30 @@ export class GameService {
 
   compareScores(): Array<Game>{
     if(this.p1Game.totalScore > this.p2Game.totalScore){
-      //Player 1 wins
+      //Player 1 wins - keeps their turn
       this.p1Game.GamesWon +=1;
       this.resetScores();
       this.p1Game.Turn = true;
       this.p2Game.Turn = false;
+      this.p1Game.wonLastGame = true;
+      this.p2Game.wonLastGame = false;
     }else if(this.p2Game.totalScore > this.p1Game.totalScore){
-      //Player 2 wins
+      //Player 2 wins - keeps their turn
       this.p2Game.GamesWon +=1;
       this.resetScores();
       this.p2Game.Turn = true;
       this.p1Game.Turn = false;
+      this.p2Game.wonLastGame = true;
+      this.p1Game.wonLastGame = false;
     }else if(this.p1Game.totalScore == this.p2Game.totalScore){
       alert("Draw!");
-      this.resetScores();
-      if(this.p1Game.Turn){
-        this.p1Game.Turn = false;
-        this.p2Game.Turn = true;
-      }else{
-        this.p1Game.Turn = true;
-        this.p2Game.Turn = false;
-      }
+      this.resetScores(); //Just want to reset scores, no player has won. Keep the same turn
     }
-
-    return [this.p1Game, this.p2Game];
+    
+    this.gameArray = new Array<Game>();
+    this.gameArray.push(this.p1Game, this.p2Game);
+     
+    return this.gameArray;
   }
 
   resetScores(){

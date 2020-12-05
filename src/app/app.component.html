@@ -6,19 +6,23 @@
 
   <app-player1 
               [(totalScore1)] = "totalScore1"
-              (totalScore1Change) = "totalScore1=$event"
+              [die1Number] = "die1Number"
+              (totalScore1Change) = "totalScore1Inc($event)"
               [(user1turn)] = "p1Turn"
               [user1GamesWon] = "user1GamesWon"
               (user1turnChange)="p1Turn=$event"
               (player1Sticked)="handlePlayer1Sticked($event)"
+              (player1GoneOver)="handlePlayer1GoneOver($event)"
               ></app-player1>
   <app-player2 
                 [(totalScore2)] = "totalScore2"
-                (totalScore2Change) = "totalScore2=$event"
+                (totalScore2Change) = "totalScore2Inc($event)"
+                [die2Number] = "die2Number"
                 [(user2turn)] = "p2Turn"
                 [user2GamesWon] = "user2GamesWon"
                 (user2turnChange)="p2Turn=$event"
                 (player2Sticked)="handlePlayer2Sticked($event)"
+                (player2GoneOver)="handlePlayer2GoneOver($event)"
                 ></app-player2>
 
  
