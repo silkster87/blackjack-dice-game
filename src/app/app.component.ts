@@ -106,7 +106,7 @@ export class AppComponent {
       //Player 2 lost game
       this.user1GamesWon += 1;
       this.gameService.getPlayer1Game().wonLastGame = false;
-      this.gameService.getPlayer1Game().wonLastGame = true;
+      this.gameService.getPlayer2Game().wonLastGame = true;
       this.p1Turn = true;
       this.p2Turn = false;
     }
