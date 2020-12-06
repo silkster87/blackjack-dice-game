@@ -12,7 +12,7 @@ export class Player2Component {
   @Input() user2GamesWon: number;
 
   @Input() die2Number: number;
-  localTotalScore: number;
+  private localTotalScore: number;
    
   @Output() user2turnChange = new EventEmitter<boolean>();
   @Output() totalScore2Change = new EventEmitter<number>();
@@ -35,7 +35,6 @@ export class Player2Component {
       this.totalScore2Change.emit(this.totalScore2);
       this.totalScore2 = 0;
     }
-    
   }
 
   handleStickButtonClick2(): void{

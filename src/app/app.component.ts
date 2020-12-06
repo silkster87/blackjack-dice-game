@@ -9,6 +9,12 @@ import { GameService } from './services/game.service';
 
 export class AppComponent {
 
+  /**
+   * The AppComponent is the root or parent component of the application. Both player1 and player2 components will communicate with the parent
+   * component in determining what should be displayed for those components. The AppComponent will communicate with the GameService to handle
+   * the business logic of the game.
+   */
+
    p1Turn: boolean;
    p2Turn: boolean;
    totalScore1: number;
@@ -72,59 +78,26 @@ export class AppComponent {
   }
 
   handlePlayer1GoneOver(totalScore1Over: number):void{
-    if(totalScore1Over == 21){
-      //Player 1 won game
-      this.user1GamesWon += 1;
-      this.gameService.getPlayer1Game().wonLastGame = true;
-      this.gameService.getPlayer2Game().wonLastGame = false;
-      this.p1Turn = true;
-      this.p2Turn = false;
-    }else if(totalScore1Over > 21){
-      //Player 1 lost game
-      this.user2GamesWon += 1;
-      this.gameService.getPlayer1Game().wonLastGame = false;
-      this.gameService.getPlayer2Game().wonLastGame = true;
-      this.p1Turn = false;
-      this.p2Turn = true;
-    }
-    this.totalScore1 = 0;
-    this.totalScore2 = 0;
-    this.die1Number = null;
-    this.die2Number = null;
-    console.log(this.die1Number);
+    this.gameStatusArray = this.gameService.player1GoneOver(totalScore1Over);
+    this.setupNewGame(this.gameStatusArray);
   }
 
   handlePlayer2GoneOver(totalScore2Over: number):void{
-    if(totalScore2Over == 21){
-      //Player 2 won game
-      this.user2GamesWon +=1;
-      this.gameService.getPlayer1Game().wonLastGame = false;
-      this.gameService.getPlayer2Game().wonLastGame = true;
-      this.p1Turn = false;
-      this.p2Turn = true;
-    }else if(totalScore2Over > 21){
-      //Player 2 lost game
-      this.user1GamesWon += 1;
-      this.gameService.getPlayer1Game().wonLastGame = true;
-      this.gameService.getPlayer2Game().wonLastGame = false;
-      this.p1Turn = true;
-      this.p2Turn = false;
-    }
-    this.totalScore1 = 0;
-    this.totalScore2 = 0;
-    this.die1Number = null;
-    this.die2Number = null;
+    this.gameStatusArray = this.gameService.player2GoneOver(totalScore2Over);
+    this.setupNewGame(this.gameStatusArray);
   }
  
   setupNewGame(gameArray : Array<Game>){
       this.p1Turn = gameArray[0].Turn;
-      this.totalScore1 = gameArray[0].totalScore; 
+      this.totalScore1 = 0; 
     
       this.user1GamesWon = gameArray[0].GamesWon;
 
       this.p2Turn = gameArray[1].Turn;
-      this.totalScore2 = gameArray[1].totalScore; //This isn't changing the actual total score for a new game.
+      this.totalScore2 = 0; //This isn't changing the actual total score for a new game.
       this.user2GamesWon = gameArray[1].GamesWon; //This does change the score
+      this.gameService.getPlayer1Game().wonLastGame = gameArray[0].wonLastGame;
+      this.gameService.getPlayer2Game().wonLastGame = gameArray[1].wonLastGame;
       console.log(gameArray);
       console.log(`Player 1 score: ${this.totalScore1}`);
       console.log(`Player 2 score: ${this.totalScore2}`);

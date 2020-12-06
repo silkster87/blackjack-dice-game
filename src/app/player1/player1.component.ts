@@ -13,7 +13,7 @@ export class Player1Component{
 @Input() user1turn: boolean;
 
 @Input() die1Number: number;
-localTotalScore: number;
+private localTotalScore: number;
 
 @Output() user1turnChange = new EventEmitter<boolean>();
 @Output() totalScore1Change = new EventEmitter<number>();
@@ -37,7 +37,6 @@ handleRollDiceButtonClick1(): void{
     this.totalScore1Change.emit(this.totalScore1);
     this.totalScore1 = 0;
   }
-  
 }
 
 handleStickButtonClick1(): void{

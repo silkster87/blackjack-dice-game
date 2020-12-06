@@ -7,6 +7,11 @@ import { Game } from '../models/game.model';
 
 export class GameService {
 
+  /*The GameService class handles the logic of working out whether or not Player 1 or 2 has won a game. It also
+  * initiates the setup of the game with Player 1 starting first. If a Player wins a game they start the next game
+  * retaining their first go.
+  */
+
   private p1Game: Game;
   private p2Game: Game;
   private gameArray : Array<Game>;
@@ -46,6 +51,50 @@ export class GameService {
     this.p2Game.totalScore = score;
   }
 
+  player1GoneOver(score1: number): Array<Game>{
+    if(score1 == 21){
+      //Player 1 won game
+      alert(`Player 1 wins game with score: ${score1}`);
+      this.p1Game.GamesWon += 1;
+      this.p1Game.wonLastGame = true;
+      this.p2Game.wonLastGame = false;
+      this.p1Game.Turn = true;
+      this.p2Game.Turn = false;
+    }else if(score1 > 21){
+      //Player 1 lost game
+      alert(`Player 1 lost game with score: ${score1}`);
+      this.p2Game.GamesWon += 1;
+      this.p1Game.wonLastGame = false;
+      this.p2Game.wonLastGame = true;
+      this.p1Game.Turn = false;
+      this.p2Game.Turn = true;
+    }
+    return this.returnGameArray();
+  }
+
+  player2GoneOver(score2: number): Array<Game>{
+    if(score2 == 21){
+      //Player 2 won game
+      alert(`Player 2 wins game with score: ${score2}`);
+      this.p2Game.GamesWon += 1;
+      this.p2Game.wonLastGame = true;
+      this.p1Game.wonLastGame = false;
+      this.p1Game.Turn = false;
+      this.p2Game.Turn = true;
+    }else if(score2 > 21){
+      //Player 2 lost game
+      alert(`Player 2 lost game with score: ${score2}`);
+      this.p1Game.GamesWon += 1;
+      this.p1Game.wonLastGame = true;
+      this.p2Game.wonLastGame = false;
+      this.p1Game.Turn = true;
+      this.p2Game.Turn = false;
+    }
+    return this.returnGameArray();
+  }
+
+
+
   compareScores(): Array<Game>{
     if(this.p1Game.totalScore > this.p2Game.totalScore){
       //Player 1 wins - keeps their turn
@@ -68,14 +117,17 @@ export class GameService {
       this.resetScores(); //Just want to reset scores, no player has won. Keep the same turn
     }
     
-    this.gameArray = new Array<Game>();
-    this.gameArray.push(this.p1Game, this.p2Game);
-     
-    return this.gameArray;
+    return this.returnGameArray();
   }
 
   resetScores(){
     this.p1Game.totalScore = 0;
     this.p2Game.totalScore = 0;
+  }
+
+  returnGameArray(): Array<Game>{
+    this.gameArray = new Array<Game>();
+    this.gameArray.push(this.p1Game, this.p2Game);
+    return this.gameArray;
   }
 }
