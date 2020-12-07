@@ -67,6 +67,12 @@ export class GameService {
       this.p2Game.wonLastGame = false;
       this.p1Game.Turn = true;
       this.p2Game.Turn = false;
+
+      if(this.p1Game.GamesWon == 5){
+        alert("Player 1 wins Match!");
+        this.p1Game.GamesWon = 0;
+        this.p2Game.GamesWon = 0;
+      }
     }else if(score1 > 21){
       //Player 1 lost game
       alert(`Player 1 lost game with score: ${score1}`);
@@ -75,6 +81,12 @@ export class GameService {
       this.p2Game.wonLastGame = true;
       this.p1Game.Turn = false;
       this.p2Game.Turn = true;
+
+      if(this.p2Game.GamesWon == 5){
+        alert("Player 2 wins Match!");
+        this.p2Game.GamesWon = 0;
+        this.p2Game.GamesWon = 0;
+      }
     }
     this.resetScores();
     return this.returnGameArray();
@@ -89,6 +101,12 @@ export class GameService {
       this.p1Game.wonLastGame = false;
       this.p1Game.Turn = false;
       this.p2Game.Turn = true;
+
+      if(this.p2Game.GamesWon == 5){
+        alert("Player 2 wins Match!");
+        this.p2Game.GamesWon = 0;
+        this.p1Game.GamesWon = 0;
+      }
     }else if(score2 > 21){
       //Player 2 lost game
       alert(`Player 2 lost game with score: ${score2}`);
@@ -97,6 +115,11 @@ export class GameService {
       this.p2Game.wonLastGame = false;
       this.p1Game.Turn = true;
       this.p2Game.Turn = false;
+      if(this.p1Game.GamesWon == 5){
+        alert("Player 1 wins Match!");
+        this.p1Game.GamesWon = 0;
+        this.p2Game.GamesWon = 0;
+      }
     }
     this.resetScores();
     return this.returnGameArray();
