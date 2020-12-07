@@ -41,14 +41,21 @@ export class GameService {
    }
 
   player1Sticked(score: number){
-      //Wait for player 2's turn to stick
       this.p1Game.totalScore = score;
-      this.p2Game.Turn = true;
-      this.p1Game.Turn = false;
   }
 
   player2Sticked(score: number){
     this.p2Game.totalScore = score;
+  }
+
+  checkScore1(score1: number): number{
+      this.p1Game.totalScore = score1;
+      return score1;
+  }
+
+  checkScore2(score2: number): number{
+    this.p2Game.totalScore = score2;
+    return score2;
   }
 
   player1GoneOver(score1: number): Array<Game>{
@@ -69,6 +76,7 @@ export class GameService {
       this.p1Game.Turn = false;
       this.p2Game.Turn = true;
     }
+    this.resetScores();
     return this.returnGameArray();
   }
 
@@ -90,6 +98,7 @@ export class GameService {
       this.p1Game.Turn = true;
       this.p2Game.Turn = false;
     }
+    this.resetScores();
     return this.returnGameArray();
   }
 

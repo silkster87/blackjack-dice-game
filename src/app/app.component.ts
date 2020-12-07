@@ -46,11 +46,11 @@ export class AppComponent {
    }
 
    totalScore1Inc(score1: number):void{
-    this.gameService.getPlayer1Game().totalScore = score1;
+     this.totalScore1 = this.gameService.checkScore1(score1);
    }
 
    totalScore2Inc(score2: number):void{
-    this.gameService.getPlayer2Game().totalScore = score2;
+     this.totalScore2 = this.gameService.checkScore2(score2);
    }
    
   handlePlayer1Sticked(totalPlayerScore1: number):void{
@@ -80,27 +80,25 @@ export class AppComponent {
   handlePlayer1GoneOver(totalScore1Over: number):void{
     this.gameStatusArray = this.gameService.player1GoneOver(totalScore1Over);
     this.setupNewGame(this.gameStatusArray);
+    
   }
 
   handlePlayer2GoneOver(totalScore2Over: number):void{
     this.gameStatusArray = this.gameService.player2GoneOver(totalScore2Over);
     this.setupNewGame(this.gameStatusArray);
+    
   }
  
   setupNewGame(gameArray : Array<Game>){
       this.p1Turn = gameArray[0].Turn;
-      this.totalScore1 = 0; 
-    
+      this.totalScore1 = gameArray[0].totalScore; 
       this.user1GamesWon = gameArray[0].GamesWon;
-
       this.p2Turn = gameArray[1].Turn;
-      this.totalScore2 = 0; //This isn't changing the actual total score for a new game.
-      this.user2GamesWon = gameArray[1].GamesWon; //This does change the score
+      this.totalScore2 = gameArray[1].totalScore; 
+      this.user2GamesWon = gameArray[1].GamesWon; 
       this.gameService.getPlayer1Game().wonLastGame = gameArray[0].wonLastGame;
       this.gameService.getPlayer2Game().wonLastGame = gameArray[1].wonLastGame;
-      console.log(gameArray);
-      console.log(`Player 1 score: ${this.totalScore1}`);
-      console.log(`Player 2 score: ${this.totalScore2}`);
+            
   }
   
 }
