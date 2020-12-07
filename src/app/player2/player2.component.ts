@@ -39,7 +39,7 @@ export class Player2Component {
 
   handleStickButtonClick2(): void{
     this.die2Number = null;
-    this.user2turn = false;
+    
     this.user2turnChange.emit(this.user2turn);
     //Send totalScore2 back up to the parent to compare with totalScore1
     this.totalScore2Change.emit(this.totalScore2);

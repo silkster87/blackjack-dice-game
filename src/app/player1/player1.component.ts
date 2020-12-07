@@ -42,7 +42,7 @@ handleRollDiceButtonClick1(): void{
 
 handleStickButtonClick1(): void{
       this.die1Number = null;
-      this.user1turn = false;
+      
       this.user1turnChange.emit(this.user1turn);
       //Send totalScore1 back up to the parent to compare with totalScore2
       this.totalScore1Change.emit(this.totalScore1);
